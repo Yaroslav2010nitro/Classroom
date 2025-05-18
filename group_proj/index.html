@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom - Онлайн навчання</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="first-scr">
+        <h1>Classroom</h1>
+        <p>Нажміть щоб увійти</p>
+        <button id="login-btn">Увійти</button>
+    </div>
+
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="logo">📚Клас</div>
+            <ul>
+                <li><a href="#">Головна сторінка</a></li>
+                <li><a href="#classes" class="active">Мої класи</a></li>
+                <li><a href="#assignments">Завдання</a></li>
+                <li><a href="#calendar">Календар</a></li>
+                <li><a href="#settings">Налаштування</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="main-scr screen">
+                <div class="classroom-actions">
+                    <button class="join-class">Приєднатись до класу</button>
+                    <button class="create-class">Створити клас</button>
+                    <h2>Зміни колір фону</h2>
+                    <input type="range" id="bkgc" min="0" max="360" value="180"/>
+                </div>
+
+                <div class="classes-list">
+                    <h2>Мої класи</h2>
+                    <div class="class-grid" id="classGrid">
+                        <p id="noClassesMessage" style="display: none;">У вас поки немає класів. Створіть новий клас або приєднайтесь до існуючого.</p>
+                    </div>  
+                </div>
+
+                <div class="modal" id="joinClassModal">
+                    <div class="modal-content">
+                        <h2>Приєднатись до класу</h2>
+                        <form id="joinClassForm">
+                            <div class="form-group">
+                                <label for="classCode">Код класу:</label>
+                                <input type="text" id="classCode" required placeholder="Введіть код класу">
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="cancel-btn">Скасувати</button>
+                                <button type="submit" class="join-btn">Приєднатись</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal" id="createClassModal">
+                    <div class="modal-content">
+                        <h2 id="modalTitle">Створити новий клас</h2>
+                        <form id="createClassForm">
+                            <div class="form-group">
+                                <label for="className">Назва класу:</label>
+                                <input type="text" id="className" required placeholder="Введіть назву класу">
+                            </div>
+                            <div class="form-group">
+                                <label for="classSubject">Предмет:</label>
+                                <input type="text" id="classSubject" required placeholder="Введіть предмет">
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="cancel-btn" onclick="hideModal('createClassModal')">Скасувати</button>
+                                <button type="submit" class="create-btn">Зберегти</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-scr screen">
+                <div class="screen-header">
+                    <h2>Календар</h2>
+                    <button class="add-task-btn" onclick="showAddTaskForm()">Додати завдання</button>
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-section">
+                        <div class="month-header">
+                            <button onclick="prevMonth()">←</button>
+                            <span id="currentMonth">Квітень</span>
+                            <button onclick="nextMonth()">→</button>
+                        </div>
+                        <table class="calendar-table">
+                            <tr>
+                                <th>Пн</th>
+                                <th>Вт</th>
+                                <th>Ср</th>
+                                <th>Чт</th>
+                                <th>Пт</th>
+                                <th>Сб</th>
+                                <th>Нд</th>
+                            </tr>
+                            <tr>
+                                <td onclick="showDayTasks(1)">1</td>
+                                <td onclick="showDayTasks(2)">2</td>
+                                <td onclick="showDayTasks(3)">3</td>
+                                <td onclick="showDayTasks(4)">4</td>
+                                <td onclick="showDayTasks(5)">5</td>
+                                <td onclick="showDayTasks(6)">6</td>
+                                <td onclick="showDayTasks(7)">7</td>
+                            </tr>
+                            <tr>
+                                <td onclick="showDayTasks(8)">8</td>
+                                <td onclick="showDayTasks(9)">9</td>
+                                <td onclick="showDayTasks(10)">10</td>
+                                <td onclick="showDayTasks(11)">11</td>
+                                <td onclick="showDayTasks(12)">12</td>
+                                <td onclick="showDayTasks(13)">13</td>
+                                <td onclick="showDayTasks(14)">14</td>
+                            </tr>
+                            <tr>
+                                <td onclick="showDayTasks(15)">15</td>
+                                <td onclick="showDayTasks(16)">16</td>
+                                <td onclick="showDayTasks(17)">17</td>
+                                <td onclick="showDayTasks(18)">18</td>
+                                <td onclick="showDayTasks(19)">19</td>
+                                <td onclick="showDayTasks(20)">20</td>
+                                <td onclick="showDayTasks(21)">21</td>
+                            </tr>
+                            <tr>
+                                <td onclick="showDayTasks(22)">22</td>
+                                <td onclick="showDayTasks(23)">23</td>
+                                <td onclick="showDayTasks(24)">24</td>
+                                <td onclick="showDayTasks(25)">25</td>
+                                <td onclick="showDayTasks(26)">26</td>
+                                <td onclick="showDayTasks(27)">27</td>
+                                <td onclick="showDayTasks(28)">28</td>
+                            </tr>
+                            <tr>
+                                <td onclick="showDayTasks(29)">29</td>
+                                <td onclick="showDayTasks(30)">30</td>
+                                <td onclick="showDayTasks(31)">31</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tasks-section">
+                        <div id="dayTasks" class="day-tasks">
+                            <h3>Завдання на день</h3>
+                            <div id="tasksList" class="tasks-list"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="addTaskModal" class="modal">
+                    <div class="modal-content">
+                        <h3>Додати нове завдання</h3>
+                        <div class="form-group">
+                            <label for="taskDay">День:</label>
+                            <input type="number" id="taskDay" min="1" max="31" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskTitle">Назва:</label>
+                            <input type="text" id="taskTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskClass">Клас:</label>
+                            <input type="text" id="taskClass" required>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="cancel-btn" onclick="hideAddTaskForm()">Скасувати</button>
+                            <button class="create-btn" onclick="addTask()">Додати</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assignments-scr screen">
+                <h2>Завдання</h2>
+                <div class="assignments-actions">
+                    <button class="add-assignment">Додати завдання</button>
+                </div>
+                <div class="assignments-list" id="assignmentsList">
+                    <div class="assignment-filters">
+                        <select id="classFilter">
+                            <option value="all">Всі класи</option>
+                        </select>
+                        <select id="statusFilter">
+                            <option value="all">Всі статуси</option>
+                            <option value="pending">Очікує</option>
+                            <option value="completed">Виконано</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal" id="addAssignmentModal">
+                    <div class="modal-content">
+                        <h2>Додати завдання</h2>
+                        <form id="addAssignmentForm">
+                            <div class="form-group">
+                                <label for="assignmentTitle">Назва:</label>
+                                <input type="text" id="assignmentTitle" required placeholder="Введіть назву завдання">
+                            </div>
+                            <div class="form-group">
+                                <label for="assignmentClass">Клас:</label>
+                                <select id="assignmentClass" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignmentDueDate">Дедлайн:</label>
+                                <input type="date" id="assignmentDueDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignmentDescription">Опис:</label>
+                                <textarea id="assignmentDescription" rows="4" placeholder="Опис завдання"></textarea>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="cancel-btn">Скасувати</button>
+                                <button type="submit" class="create-btn">Створити</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings" class="settings screen">
+                <div class="settings-container">
+                    <div class="settings-card">
+                        <h2>Налаштування</h2>
+                        
+                        <div class="setting-group">
+                            <label for="theme-select">Тема інтерфейсу</label>
+                            <select id="theme-select" name="theme">
+                                <option value="light">Світла</option>
+                                <option value="dark">Темна</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="language-select">Мова</label>
+                            <select id="language-select" name="language">
+                                <option value="uk">Українська</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="notifications">Сповіщення</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notifications" name="notifications">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-actions">
+                            <button type="button" class="cancel-btn" onclick="resetSettings()">Скинути</button>
+                            <button type="button" class="save-btn" onclick="saveSettings()">Зберегти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
